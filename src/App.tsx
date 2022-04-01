@@ -3,9 +3,21 @@ import logo from './logo.svg';
 import Button from './components/Button';
 import ButtonClass from './components/ButtonClass';
 import './App.css';
-class App extends Component {
+
+interface AppState {
+  type: string;
+}
+class App extends Component<{}, AppState> {
+  constructor(props: any) {
+    super(props);
+    this.myFunction = this.myFunction.bind(this);
+    this.state = {
+      type: 'primary'
+    }
+  }
   myFunction(text: string) {
     alert(text);
+    this.setState({type: 'danger'});
   }
   render() {
     return (
@@ -21,7 +33,7 @@ class App extends Component {
                 <Button text="Added" type="primary" action={this.myFunction} />
               </div>
               <div className='col-3'>
-                <ButtonClass text="Deleted" type="danger" action={this.myFunction} />
+                <ButtonClass text="Added" type={this.state.type} action={this.myFunction} />
               </div>
             </div>
           </div>
